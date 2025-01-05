@@ -5,17 +5,11 @@
       Your browser does not support the audio element.
     </audio>
     <button id="audio-toggle" @click="toggleBgm">{{ isMuted ? 'Unmute' : 'Mute' }}</button>
-    <select id="language-selector" @change="changeLanguage">
-      <option value="en">English</option>
-      <option value="kr">Korean</option>
-      <option value="jp">Japanese</option>
-      <option value="ch">Chinese</option>
-    </select>
     <div id="pageflip-container" style="background-image: url('/background.jpg'); background-size: cover; background-position: center;">
       <!-- First Cover Page -->
       <div class="page page-cover" data-density="hard">
-        <h2>{{ pages[0]?.content.title }}</h2>
-        <p>{{ pages[0]?.content.body }}</p>
+        <h2>{{ pages[0].content.title }}</h2>
+        <p>{{ pages[0].content.body }}</p>
       </div>
 
       <!-- Dynamic Pages -->
@@ -30,8 +24,8 @@
 
       <!-- Last Cover Page -->
       <div class="page page-cover" data-density="hard">
-        <h2>{{ pages[pages.length - 1]?.content.title }}</h2>
-        <p>{{ pages[pages.length - 1]?.content.body }}</p>
+        <h2>{{ pages[pages.length - 1].content.title }}</h2>
+        <p>{{ pages[pages.length - 1].content.body }}</p>
       </div>
     </div>
     <div class="controls">
@@ -43,27 +37,17 @@
 
 <script>
 import { PageFlip } from 'page-flip';
-import enPages from '@/content/pages.en.json';
-import krPages from '@/content/pages.kr.json';
-import jpPages from '@/content/pages.jp.json';
-import chPages from '@/content/pages.ch.json';
+import pagesData from '@/content/pages.json';
 
 export default {
   name: 'App',
   data() {
     return {
       pageFlip: null,
-      pages: enPages,
-      bgm: enPages[0]?.bgm || '',
+      pages: pagesData,
+      bgm: pagesData[0]?.bgm || '',
       isMuted: false,
       currentBgm: '',
-      currentLanguage: 'en',
-      allPages: {
-        en: enPages,
-        kr: krPages,
-        jp: jpPages,
-        ch: chPages
-      }
     };
   },
   mounted() {
@@ -72,23 +56,6 @@ export default {
     });
   },
   methods: {
-    changeLanguage(event) {
-      const selectedLanguage = event.target.value;
-      this.currentLanguage = selectedLanguage;
-      this.pages = this.allPages[selectedLanguage];
-      this.bgm = this.pages[0]?.bgm || '';
-
-      const currentPageIndex = this.pageFlip.getCurrentPageIndex();
-      const wasMuted = this.isMuted;
-
-      this.pageFlip.destroy();
-      this.$nextTick(() => {
-        this.initPageFlip();
-        this.pageFlip.turnToPage(currentPageIndex);
-      });
-      this.isMuted = wasMuted;
-      this.updateAudioState();
-    },
     initPageFlip() {
       const container = document.getElementById('pageflip-container');
       this.pageFlip = new PageFlip(container, {
@@ -143,9 +110,9 @@ export default {
       if (shouldMute) {
         audioElement.pause();
       } else if (!this.isMuted && highestPriorityBgm !== this.currentBgm) {
-        this.currentBgm = highestPriorityBgm;
+        this.currentBgm = highestPriorityBgm; // Update current BGM without reloading
         if (audioElement.paused) {
-          audioElement.play();
+          audioElement.play(); // Resume if paused
         }
       }
 
@@ -163,3 +130,67 @@ export default {
   },
 };
 </script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #f4f4f4;
+}
+.controls {
+  margin-top: 20px;
+}
+button {
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+#audio-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #274C77;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.flip-book {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  display: none;
+  background-size: cover;
+}
+.page {
+  padding: 20px;
+  background-color: hsl(35, 55%, 98%);
+  color: #274C77;
+  border: solid 1px hsl(35, 20%, 70%);
+  overflow: hidden;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-align: center;
+}
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+</style>
