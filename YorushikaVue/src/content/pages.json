@@ -3,16 +3,16 @@
         "type": "Cover",
         "bgm": "01.mp3",
         "content": {
-            "title": "Cover Page",
-            "body": "Welcome to the Interactive Book"
+            "title": "Moonlight",
+            "body": "by Yorushika"
         }
     },
     {
         "type": "Text",
         "bgm": "01.mp3",
         "content": {
-            "title": "Page 1",
-            "body": "This is page 1."
+            "title": "To Elma",
+            "body": ""
         }
     },
     {
@@ -20,15 +20,15 @@
         "bgm": "01.mp3",
         "content": {
             "title": "Image Page",
-            "body": "public/background.jpg"
+            "body": "public/image/01.png"
         }
     },
     {
         "type": "Text",
         "bgm": "01.mp3",
         "content": {
-            "title": "Page 2",
-            "body": "This is page 2."
+            "title": "8/31 “Untitled”",
+            "body": "Stockholm, Gamla stan\nThe hustle and bustle falling on the cobblestone pavement\n\nI don’t have much ink left.\nI think I’ll fill this box with the songs I wrote while I was traveling and the pictures I took.\nIn this country, if I photograph even a single street corner, a familiar smell comes to me from somewhere.\nI’m pretty terrible at taking pictures, but I printed all the ones that weren’t blurry.\nElma, all the words and melodies in this box are yours now, so you can do whatever you like with them. I certainly don’t need them anymore.\n\nTo the end, I stayed the same, no matter where I went.\nA hideous ghost driven mad by art, selfishly putting on an attitude of pessimism, thinking only of my work.\nYes, in the end, music, to me, was– \n (Translated by EJ Translations)"
         }
     },
     {
