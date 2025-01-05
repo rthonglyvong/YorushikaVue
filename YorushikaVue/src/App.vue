@@ -177,7 +177,21 @@ export default {
       if (this.bgmFiles[highestPriorityBgm]) {
         // If a new BGM is selected, update and play it
         if (shouldMute) {
-          audioElement.pause();
+          let fadeDuration = 2000; // 2 seconds
+          let fadeStep = 0.05; // Decrease volume by 0.05 each step
+          let fadeInterval = 50; // Interval time for each fade step (in ms)
+          let volume = audioElement.volume;
+
+          // Gradually decrease the volume
+          let fadeOutInterval = setInterval(() => {
+            if (volume > 0) {
+              volume -= fadeStep;  // Reduce volume
+              audioElement.volume = volume;  // Set new volume
+            } else {
+              clearInterval(fadeOutInterval);  // Stop when volume reaches 0
+              audioElement.pause();  // Pause the audio
+            }
+          }, fadeInterval);
         } else if (highestPriorityBgm !== this.currentBgm) {
           this.currentBgm = highestPriorityBgm; // Set the new BGM
           const newBgm = this.bgmFiles[highestPriorityBgm]; // Get the audio object
@@ -185,6 +199,22 @@ export default {
           if (audioElement.paused && !this.isMuted) {
             audioElement.play(); // Play the new BGM
           }
+        } else if (audioElement.paused) {
+          let fadeDuration = 2000; // 2 seconds
+          let fadeStep = 0.05; // Decrease volume by 0.05 each step
+          let fadeInterval = 50; // Interval time for each fade step (in ms)
+          let volume = audioElement.volume;
+
+          // Gradually decrease the volume
+          let fadeOutInterval = setInterval(() => {
+            if (volume < 1) {
+              volume += fadeStep;  // Reduce volume
+              audioElement.volume = volume;  // Set new volume
+            } else {
+              clearInterval(fadeOutInterval);  // Stop when volume reaches 0
+              audioElement.play();  // Pause the audio
+            }
+          }, fadeInterval);
         }
       } else {
         console.error(`Selected BGM does not exist in bgmFiles: ${highestPriorityBgm}`);
