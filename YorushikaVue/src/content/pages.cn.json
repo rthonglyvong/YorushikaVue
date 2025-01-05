@@ -3,48 +3,160 @@
         "type": "Cover",
         "bgm": "01.mp3",
         "content": {
-            "title": "Cover Page",
-            "body": "Welcome to the Interactive Book"
+            "title": "Moonlight",
+            "body": "by Yorushika"
         }
     },
     {
         "type": "Text",
         "bgm": "01.mp3",
         "content": {
-            "title": "Page 1",
-            "body": "This is page 1."
+            "title": "To Elma",
+            "body": ""
         }
     },
     {
         "type": "Image",
         "bgm": "01.mp3",
         "content": {
-            "title": "Image Page",
-            "body": "public/background.jpg"
+            "title": "",
+            "body": "image/01.png"
         }
     },
     {
         "type": "Text",
         "bgm": "01.mp3",
         "content": {
-            "title": "Page 2",
-            "body": "This is page 2."
+            "title": "8/31 “Untitled”",
+            "body": "Stockholm, Gamla stan\nThe hustle and bustle falling on the cobblestone pavement\n\nI don’t have much ink left.\nI think I’ll fill this box with the songs I wrote while I was traveling and the pictures I took.\nIn this country, if I photograph even a single street corner, a familiar smell comes to me from somewhere.\nI’m pretty terrible at taking pictures, but I printed all the ones that weren’t blurry.\nElma, all the words and melodies in this box are yours now, so you can do whatever you like with them. I certainly don’t need them anymore.\n\nTo the end, I stayed the same, no matter where I went.\nA hideous ghost driven mad by art, selfishly putting on an attitude of pessimism, thinking only of my work.\nYes, in the end, music, to me, was– \n (Translated by EJ Translations)"
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "",
+            "body": "image/02.png"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "3/14",
+            "body": "When I leaned out the window to look out at the sky, it was so clear that I suddenly remembered you and thought that I would write you a letter. Well, that was what it was at the start, but thinking about it now, this is something like an escape. I think you know what I’m escaping from. From society, from connections, from friends, from my job, from life…. Basically, from everything.\nOh, right, before I get into that, I should tell you: This may surprise you, but I’ve recently learned to do housework. That’s right, me, who couldn’t even use a washing machine before. But I guess being a human means changing, however slowly.\nIt’s just like you said, Elma: A single day is far too short, but just living is too long. When I think that the summer is ending like this, I start to feel like I won’t be able to create anything serious even if I live to be 100. To tell you the truth, I quit the part-time job I used to have. It was at the beginning of last August.\nElma, there must be a lot of people who never do anything with their lives. Fifty people working hard can’t match up to ten people with talent, and no matter how much you regret it, you can’t reverse a failure into a success–that will never change. Words are no match for bullets. They can’t miraculously cure illness."
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "",
+            "body": "Still, I believed that music alone was different. Music wasn’t just art. Making things that are for people–what could be more valuable? Which is to say, those disgusting money-worshippers are wrong. It’s like Oscar Wilde said. Art isn’t a reflection in a cracked mirror. “Life imitates art far more than Art imitates life.”[1]\nBut lately I’ve been thinking. In the end, if you don’t have a life, if you don’t have a body that can make things, you won’t be able to create anything. No matter how I struggle against it, everything I create draws from my heart, my way of living, my experiences–in this way, my art is tied to my life. As if it really were a mirror.\nThis is really just a journal, Elma. I’m sure there should still be art inside me. It’s almost exactly the thing that Oscar denied. That contradiction has always caused me pain. Music has become something I can no longer enjoy.\nWhat do you think, Elma?\nNotes:\n[1] From “The Decay of Lying.”\n(Translated by EJ Translations)"
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "",
+            "body": "image/03.png"
+        }
+    },
+    {
+        "type": "Video",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "3/21 (Deep Indigo)",
+            "body": "https://www.youtube.com/watch?v=4MoRLTAJY_0?cc_load_policy=1&cc_lang_pref=en&hl=en"
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "",
+            "body": "image/04.png"
         }
     },
     {
         "type": "Video",
         "bgm": "10.mp3",
         "content": {
-            "title": "Yorushika - Parade",
-            "body": "https://www.youtube.com/embed/ry3Tupx4BL4?cc_load_policy=1&cc_lang_pref=en&hl=en"
+            "title": "8/7 (August, That Place, Moonlight)",
+            "body": "https://www.youtube.com/watch?v=J6eih31MaQ8"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "4/20",
+            "body": "I'm staying in a city called Lund. Geographically, it's an old city, located in the southern tip of the country. Known as the city of scholars, it's home to the country's oldest university.\nThe Lund Cathedral is said to be built around the 12th century. There's an old astronomical clock there. The clock's machinery moves twice a day at certain times. Avoiding church service, I sit somewhere, absentmindedly thinking about the lyrics that I'm going to write. You can say this has sort of become my daily routine here in this city.\nWhile reminiscing about the time when I was living in Sekimachi, I'm writing my lyrics.\n(Translated by Night Deer Translations)"
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "",
+            "body": "image/05.png"
         }
     },
     {
         "type": "Text",
         "bgm": "10.mp3",
         "content": {
-            "title": "Page 3",
-            "body": "This is page 3."
+            "title": "",
+            "body": ""
+        }
+    },
+    {
+        "type": "Video",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "4/24 (Lyric-writing and Coffee)",
+            "body": "https://www.youtube.com/watch?v=K-4uZU9fYlc"
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "",
+            "body": "image/06.png"
+        }
+    },
+    {
+        "type": "Video",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "6/15 (I'll Dance)",
+            "body": "https://www.youtube.com/watch?v=rIgmpm-GFVU"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "7/13",
+            "body" : "I'm in a city called Linköping (Rinshōpin)\nIn Japanese, perhaps pronouncing it Rinshēpin would be closer to the actual pronunciation.\nIt's not that big of a city, but it's beautiful.\n\nClose to the city center, there's an open air museum called Gamla Linköping.\nI said it's an open air museum, but there's actually no building there that's big or eye-catching or anything of the sort.\nGamla means \"old\" in swedish, and there, the townscape and livelihood of early Linköping is preserved as-is. Should I try to put it into words, it's only this part of the city that feels like one is being taken back to the 19th century; it's that kind of place.\nIt's a wonderful city, so should you ever visit this country, I think you should try going here too.\n\nI'll talk about the song I wrote some days ago. This thing called \"Flower Verdigris\" is, in other words, \"Emerald Green.\"\nI'm hopelessly mediocre when it comes to writing lyrics so if I don't come up with a theme first, there will be times when I can't write enough words."
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "5/17",
+            "body": "The Emerald Green is an artificial poisonous dye. In that song, it all refers to \"tears.\"\n\"Tears\" are surely similar to poison.\nTears that come from suffering, happiness, bitterness, sympathy, being deeply moved, regret, they all are some sort of a poison.\nI don't care whether they're a defense mechanism to protect the body against stress or if they're to sort out feelings.\nTo me, they're all escapism.\nThey're a weakness. If feelings are a weakness, then tears are an anesthesia to justify that weakness.\nTears that come out in order to deceive the heart, are nothing but narcissism. They're a poison that numbs character.\n\nBack then, I didn't know that.Back then, I didn't know that.\nIf my memories and work were laughed at back then,\nIf someone would just beat me hard and send myself flying then, then that would be fine.\nTears that are hidden behind feelings of pride or self-esteem don't provide comfort, they're truly a poison.\nI really, truly think they are.\n\n(Translated by Night Deer Translations)"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "",
+            "body" : "About gods.\n\nGods make their home inside excellent works of art.\nEvery time someone makes a work of art, an illusion conjures up; they feel as if they're being moved by something unseen.\nPerhaps, the brush is just being moved by emotions or sentiments such as feelings of emptiness, sadness or happiness.\n\nBut to me, gods are behind that.\nFrom the heart, it goes through the fingertips, then it goes down into this rectangle-shaped paper.\nI personally like that exact moment.\nI'm sure you must think that way too.\n\nThe only thing you must not misunderstand is this: Gods make their home in works of art, they don't reside in us humans.\nIt's arrogant of the artist to think like that.\nI'm saying this because I'm imitating Oscar Wilde's philosophy, \"making art for art's sake.\"\nYes, art-making is one kind of religion.\nIt's completely the same as you always being there, existing inside my words.\n\nI'm getting low on ink. I have to be careful in how I use it.\n(Translated by Night Deer Translations)"
         }
     },
     {

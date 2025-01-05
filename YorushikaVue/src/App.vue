@@ -164,7 +164,7 @@ export default {
         maxShadowOpacity: 0.5,
         flippingTime: 1500,
         showCover: true,
-        mobileScrollSupport: false,
+        mobileScrollSupport: true,
         usePortrait: true,
       });
 
@@ -339,6 +339,22 @@ select {
   -webkit-appearance: none; /* Removes dropdown for Safari */
   -moz-appearance: none; /* Removes dropdown for Firefox */
 }
+
+.page-content p {
+  text-align: left; /* Left justify the text */
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.6;   /* Improve readability */
+  margin: 10px 0;     /* Add spacing around the paragraph */
+}
+.page-content.cover-page h2,
+.page-content.cover-page p {
+  text-align: center; /* Center-align text on cover pages */
+  font-size: 2rem;    /* Example: adjust font size for cover page */
+  margin: 20px 0;     /* Add margin if needed */
+}
+
+
 /* Optional: Adding media queries for further control */
 @media (max-width: 768px) {
   .page {
@@ -348,7 +364,7 @@ select {
 
 @media (max-width: 480px) {
   .page {
-    font-size: .7em; /* Larger font size for mobile */
+    font-size: .5em; /* Larger font size for mobile */
   }
 }
 </style>
