@@ -8,7 +8,7 @@
       <!-- First Cover Page -->
       <div class="page page-cover" data-density="hard">
         <div class="page-content">
-          <h2>{{ pages[0].content.title }}</h2>
+          <h1>{{ pages[0].content.title }}</h1>
           <p>{{ pages[0].content.body }}</p>
         </div>
       </div>
@@ -16,7 +16,7 @@
       <!-- Dynamic Pages -->
       <div v-for="(page, index) in pages.slice(1, pages.length - 1)" :key="index" class="page" :data-type="page.type">
         <div :class="'page-content page-'+index">
-          <h2 :key="selectedLanguage">{{ page.content.title }}</h2>
+          <h1 :key="selectedLanguage">{{ page.content.title }}</h1>
           <p v-if="page.type === 'Text'" :key="selectedLanguage" v-html="convertNewlines(page.content.body)"></p>
           <!-- Change iframe to dynamic player initialization -->
           <div v-if="page.type === 'Video'" ref="videoPlayer" :id="'video-' + index + 1">
@@ -29,7 +29,7 @@
       <!-- Last Cover Page -->
       <div class="page page-cover" data-density="hard">
         <div class="page-content">
-          <h2>{{ pages[pages.length - 1].content.title }}</h2>
+          <h1>{{ pages[pages.length - 1].content.title }}</h1>
           <p>{{ pages[pages.length - 1].content.body }}</p>
         </div>
       </div>
@@ -274,7 +274,9 @@ export default {
               audioElement.volume = volume;  // Set new volume
             } else {
               clearInterval(fadeOutInterval);  // Stop when volume reaches 0
-              audioElement.play();  // Pause the audio
+              if (!this.isMuted) {
+                audioElement.play();
+              }  // Pause the audio
             }
           }, fadeInterval);
         }
@@ -366,8 +368,14 @@ export default {
       }
     },
     onPlayerReady(event) {
+        const qualities = event.target.getAvailableQualityLevels();
+        console.log(qualities)
+        if (qualities && qualities.length > 0) {
+          event.target.setPlaybackQuality(qualities[0]); // Highest available quality
+        } else {
+          event.target.setPlaybackQuality('hd1080'); // Default fallback
+        }
         event.target.playVideo();
-
     },
     onPlayerStateChange(event) {
       console.log('Player state changed:', event.data);
@@ -427,7 +435,7 @@ export default {
 
 <style>
 body {
-  font-family: Arial, sans-serif;
+  font-family: serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box; /* Apply box-sizing globally */
@@ -477,7 +485,7 @@ button {
   color: #274C77;
   border: solid 1px hsl(35, 20%, 70%);
   overflow: hidden;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Waiting for the Sunrise', serif;
   font-size: clamp(12px, 5vw, 17px);
   line-height: 1.6;
   text-align: center;
@@ -495,7 +503,10 @@ button {
   height: 60%;
   width: 100%;
 }
-
+div.page-content h1 {
+  font-family: 'Fredericka the Great', cursive;
+  font-weight: 400; /* Ensure the correct weight */
+}
 select {
   margin: 5px;
   padding: 10px 20px;
@@ -517,7 +528,7 @@ select {
   line-height: 1.6;   /* Improve readability */
   margin: 10px 0;     /* Add spacing around the paragraph */
 }
-.page-content.cover-page h2,
+.page-content.cover-page h1,
 .page-content.cover-page p {
   text-align: center; /* Center-align text on cover pages */
   font-size: clamp(15px, 5vw, 48px);
@@ -528,12 +539,14 @@ select {
 /* Optional: Adding media queries for further control */
 @media (max-width: 768px) {
   .page {
+    font-family: 'Waiting for the Sunrise', serif;
     font-size: clamp(15px, 5vw, 48px);
   }
 }
 
 @media (max-width: 480px) {
   .page {
+    font-family: 'Waiting for the Sunrise', serif;
     font-size: clamp(10px, 2.7vw, 14px);
   }
 }
