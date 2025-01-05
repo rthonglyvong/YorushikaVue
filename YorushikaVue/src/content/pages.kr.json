@@ -3,56 +3,80 @@
         "type": "Cover",
         "bgm": "01.mp3",
         "content": {
-            "title": "Cover page kr",
-            "body": "Welcome to the Interactive Book"
+            "title": "Moonlight",
+            "body": "by Yorushika"
         }
     },
     {
         "type": "Text",
         "bgm": "01.mp3",
         "content": {
-            "title": "page kr 1",
-            "body": "This is page kr 1."
+            "title": "To Elma",
+            "body": ""
         }
     },
     {
         "type": "Image",
         "bgm": "01.mp3",
         "content": {
-            "title": "Image page kr",
-            "body": "public/background.jpg"
+            "title": "",
+            "body": "image/01.png"
         }
     },
     {
         "type": "Text",
         "bgm": "01.mp3",
         "content": {
-            "title": "page kr 2",
-            "body": "This is page kr 2."
+            "title": "8/31 “Untitled”",
+            "body": "Stockholm, Gamla stan\nThe hustle and bustle falling on the cobblestone pavement\n\nI don’t have much ink left.\nI think I’ll fill this box with the songs I wrote while I was traveling and the pictures I took.\nIn this country, if I photograph even a single street corner, a familiar smell comes to me from somewhere.\nI’m pretty terrible at taking pictures, but I printed all the ones that weren’t blurry.\nElma, all the words and melodies in this box are yours now, so you can do whatever you like with them. I certainly don’t need them anymore.\n\nTo the end, I stayed the same, no matter where I went.\nA hideous ghost driven mad by art, selfishly putting on an attitude of pessimism, thinking only of my work.\nYes, in the end, music, to me, was– \n (Translated by EJ Translations)"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "3/14",
+            "body": "When I leaned out the window to look out at the sky, it was so clear that I suddenly remembered you and thought that I would write you a letter. Well, that was what it was at the start, but thinking about it now, this is something like an escape. I think you know what I’m escaping from. From society, from connections, from friends, from my job, from life…. Basically, from everything.\nOh, right, before I get into that, I should tell you: This may surprise you, but I’ve recently learned to do housework. That’s right, me, who couldn’t even use a washing machine before. But I guess being a human means changing, however slowly.\nIt’s just like you said, Elma: A single day is far too short, but just living is too long. When I think that the summer is ending like this, I start to feel like I won’t be able to create anything serious even if I live to be 100. To tell you the truth, I quit the part-time job I used to have. It was at the beginning of last August.\nElma, there must be a lot of people who never do anything with their lives. Fifty people working hard can’t match up to ten people with talent, and no matter how much you regret it, you can’t reverse a failure into a success–that will never change. Words are no match for bullets. They can’t miraculously cure illness."
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "",
+            "body": "Still, I believed that music alone was different. Music wasn’t just art. Making things that are for people–what could be more valuable? Which is to say, those disgusting money-worshippers are wrong. It’s like Oscar Wilde said. Art isn’t a reflection in a cracked mirror. “Life imitates art far more than Art imitates life.”[1]\nBut lately I’ve been thinking. In the end, if you don’t have a life, if you don’t have a body that can make things, you won’t be able to create anything. No matter how I struggle against it, everything I create draws from my heart, my way of living, my experiences–in this way, my art is tied to my life. As if it really were a mirror.\nThis is really just a journal, Elma. I’m sure there should still be art inside me. It’s almost exactly the thing that Oscar denied. That contradiction has always caused me pain. Music has become something I can no longer enjoy.\nWhat do you think, Elma?\nNotes:\n[1] From “The Decay of Lying.”\n(Translated by EJ Translations)"
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "01.mp3",
+        "content": {
+            "title": "Image Page",
+            "body": "image/03.png"
         }
     },
     {
         "type": "Video",
         "bgm": "10.mp3",
         "content": {
-            "title": "Yorushika - Parade",
-            "body": "https://www.youtube.com/embed/ry3Tupx4BL4?cc_load_policy=1&cc_lang_pref=en&hl=en"
+            "title": "Yorushika - Deep Indigo",
+            "body": "https://www.youtube.com/watch?v=4MoRLTAJY_0?cc_load_policy=1&cc_lang_pref=en&hl=en"
         }
     },
     {
         "type": "Text",
         "bgm": "10.mp3",
         "content": {
-            "title": "page kr 3",
-            "body": "This is page kr 3."
+            "title": "Page 3",
+            "body": "This is page 3."
         }
     },
     {
         "type": "Text",
         "bgm": "10.mp3",
         "content": {
-            "title": "page kr 4",
-            "body": "This is page kr 4."
+            "title": "Page 4",
+            "body": "This is page 4."
         }
     },
     {

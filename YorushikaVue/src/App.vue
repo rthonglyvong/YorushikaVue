@@ -18,7 +18,7 @@
         <div class="page-content">
           <h2>{{ page.content.title }}</h2>
           <p v-if="page.type === 'Text'" v-html="convertNewlines(page.content.body)"></p>
-          <iframe v-if="page.type === 'Video'" :src="page.content.body" width="100%" height="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe v-if="page.type === 'Video'" :src="'https://www.youtube.com/embed/' + getVideoId(page.content.body)" width="100%" height="60%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           <img v-if="page.type === 'Image'" :src="page.content.body" alt="Page image" style="max-width:100%; max-height:100%; object-fit:contain;">
         </div>
       </div>
@@ -77,6 +77,29 @@ export default {
     });
   },
   methods: {
+    getVideoId(url) {
+      let languageCode;
+      switch (this.selectedLanguage) {
+        case 'jp':
+          languageCode = 'ja'; // Japanese
+          break;
+        case 'kr':
+          languageCode = 'ko'; // Korean
+          break;
+        case 'en':
+          languageCode = 'en'; // English
+          break;
+        case 'cn':
+          languageCode = 'zh-CN'; // Simplified Chinese (Mandarin)
+          break;
+        default:
+          languageCode = 'en'; // Default to English if no match
+          break;
+      }
+      console.log("video selected language: " + languageCode)
+      const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|(?:.*[?&]v=))|(?:youtu\.be\/))([\w\-]+)/);
+      return videoIdMatch ? videoIdMatch[1]+`?cc_load_policy=1&cc_lang_pref=${this.languageCode}` : null;
+    },
     convertNewlines(text) {
       return text.replace(/\n/g, '<br>');
     },
@@ -316,5 +339,16 @@ select {
   -webkit-appearance: none; /* Removes dropdown for Safari */
   -moz-appearance: none; /* Removes dropdown for Firefox */
 }
+/* Optional: Adding media queries for further control */
+@media (max-width: 768px) {
+  .page {
+    font-size: .7em; /* Larger font size for tablets */
+  }
+}
 
+@media (max-width: 480px) {
+  .page {
+    font-size: .7em; /* Larger font size for mobile */
+  }
+}
 </style>
