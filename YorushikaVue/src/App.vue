@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <audio id="background-music" autoplay loop>
-      <source :src="bgm" type="audio/mpeg">
+      <source :src="currentBgm" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
     <div id="pageflip-container" style="background-image: url('/background.jpg'); background-size: cover; background-position: center;">
@@ -31,11 +31,11 @@
       <button id="audio-toggle" @click="toggleBgm">{{ isMuted ? 'Unmute' : 'Mute' }}</button>
       <button @click="flipPrev">Previous</button>
       <button @click="flipNext">Next</button>
-      <select id="language-selector" @change="changeLanguage">
+      <select v-model="selectedLanguage" @change="changeLanguage">
         <option value="en">English</option>
-        <option value="kr">Korean</option>
-        <option value="jp">Japanese</option>
-        <option value="ch">Chinese</option>
+        <option value="kr">한국어</option>
+        <option value="jp">日本語</option>
+        <option value="cn">中文</option>
       </select>
     </div>
   </div>
@@ -44,24 +44,83 @@
 <script>
 import { PageFlip } from 'page-flip';
 import pagesData from '@/content/pages.json';
+import pagesEnData from '@/content/pages.en.json';
+import pagesKrData from '@/content/pages.kr.json';
+import pagesJpData from '@/content/pages.jp.json';
+import pagesCnData from '@/content/pages.cn.json';
 
 export default {
   name: 'App',
   data() {
     return {
+      selectedLanguage: 'en', // Default language
       pageFlip: null,
       pages: pagesData,
-      bgm: pagesData[0]?.bgm || '',
+      pagesEnData: pagesEnData,
+      pagesKrData: pagesKrData,
+      pagesJpData: pagesJpData,
+      pagesCnData: pagesCnData,
+      bgmFiles: {},  // Store preloaded audio objects by filename
+      currentBgm: '', // Track the current BGM file
       isMuted: false,
-      currentBgm: '',
     };
   },
   mounted() {
     this.$nextTick(() => {
       this.initPageFlip();
+      this.preloadBgm();  // Preload all BGM files
+      this.updateAudioState(); // Set initial bgm after pageFlip is initialized
     });
   },
   methods: {
+    // Preload all BGM files
+    preloadBgm() {
+      this.pages.forEach((page, index) => {
+        if (page.bgm && !this.bgmFiles[page.bgm]) { // Only preload if not already done
+          console.log(`Preloading BGM: /music/${page.bgm}`);
+          const audio = new Audio(`/music/${page.bgm}`);
+          this.bgmFiles[page.bgm] = audio; // Store the audio objects by the BGM filename (e.g., "01.mp3")
+        }
+      });
+    },
+    
+    getLanguageClass() {
+      switch (this.selectedLanguage) {
+        case 'en':
+          return 'en';
+        case 'kr':
+          return 'kr';
+        case 'jp':
+          return 'jp';
+        case 'cn':
+          return 'cn';
+        default:
+          return '';
+      }
+    },
+    // Change the language when the user selects a different option
+    changeLanguage(event) {
+      this.selectedLanguage = event.target.value;
+      // Optionally, update pages based on selected language here
+      this.updatePageContent();
+    },
+    updatePageContent() {
+      // You can load the corresponding pages data here based on the selected language
+      switch (this.selectedLanguage) {
+        case 'en':
+          this.pages = this.pagesEnData;
+          break;
+        case 'kr':
+          this.pages = this.pagesKrData;
+          break;
+        case 'jp':
+          this.pages = this.pagesJpData;
+          break;
+        case 'cn':
+          this.pages = this.pagesCnData;
+          break;
+      }
+    },
     initPageFlip() {
       const container = document.getElementById('pageflip-container');
       this.pageFlip = new PageFlip(container, {
@@ -81,49 +140,66 @@ export default {
 
       this.pageFlip.loadFromHTML(container.querySelectorAll('.page'));
 
+      // Update audio state after page flip
       this.pageFlip.on('flip', () => {
         this.updateAudioState();
       });
-
-      this.pageFlip.on('changeOrientation', (e) => {
-        console.log(`Orientation changed to: ${e.data}`);
-      });
     },
-    flipNext() {
-      this.pageFlip.flipNext();
-    },
-    flipPrev() {
-      this.pageFlip.flipPrev();
-    },
+    
     updateAudioState() {
       const audioElement = document.getElementById('background-music');
       const currentPage = this.pageFlip.getCurrentPageIndex();
       const nextPage = currentPage + 1;
-      const visiblePages = [currentPage, nextPage];
+      const isPortrait = window.innerHeight > window.innerWidth; // Portrait mode
+      const isLandscape = window.innerWidth > window.innerHeight; // Landscape mode
+
+      console.log(`Current Orientation: ${isPortrait ? 'Portrait' : 'Landscape'}`);
+
+      let visiblePages = [currentPage, nextPage];
       let highestPriorityBgm = this.currentBgm;
       let shouldMute = false;
-
+      if (isPortrait) {
+        visiblePages = visiblePages.slice(0, 1)
+      }
+      // Find the BGM of the visible pages
       visiblePages.forEach((pageIndex) => {
         const page = this.pages[pageIndex];
         if (page && page.type === 'Video') {
-          shouldMute = true;
+          shouldMute = true; // Mute if a video is displayed
         }
-        if (page && page.bgm && page.bgm > highestPriorityBgm) {
-          highestPriorityBgm = page.bgm;
+        if (page && page.bgm) {
+          highestPriorityBgm = page.bgm; // Update the highest priority BGM based on visible pages
         }
       });
 
-      if (shouldMute) {
-        audioElement.pause();
-      } else if (!this.isMuted && highestPriorityBgm !== this.currentBgm) {
-        this.currentBgm = highestPriorityBgm; // Update current BGM without reloading
-        if (audioElement.paused) {
-          audioElement.play(); // Resume if paused
+      // Check if the selected BGM exists in bgmFiles
+      console.log(`Selected BGM: ${highestPriorityBgm}`);
+      if (this.bgmFiles[highestPriorityBgm]) {
+        // If a new BGM is selected, update and play it
+        if (shouldMute) {
+          audioElement.pause();
+        } else if (highestPriorityBgm !== this.currentBgm) {
+          this.currentBgm = highestPriorityBgm; // Set the new BGM
+          const newBgm = this.bgmFiles[highestPriorityBgm]; // Get the audio object
+          audioElement.src = newBgm.src; // Update the audio element's source
+          if (audioElement.paused && !this.isMuted) {
+            audioElement.play(); // Play the new BGM
+          }
         }
+      } else {
+        console.error(`Selected BGM does not exist in bgmFiles: ${highestPriorityBgm}`);
       }
-
-      console.log(`BGM: ${highestPriorityBgm}, Muted: ${shouldMute}`);
     },
+    // Method to flip to the next page
+    flipNext() {
+      this.pageFlip.flipNext();
+    },
+
+    // Method to flip to the previous page
+    flipPrev() {
+      this.pageFlip.flipPrev();
+    },
+    // Toggle BGM mute/unmute
     toggleBgm() {
       const audioElement = document.getElementById('background-music');
       this.isMuted = !this.isMuted;
@@ -133,6 +209,9 @@ export default {
         audioElement.play();
       }
     },
+  },
+  watch: {
+    selectedLanguage: 'changeLanguage' // Watch for changes in selected language
   },
 };
 </script>
@@ -186,4 +265,19 @@ button {
   width: 100%;
   text-align: center;
 }
+
+select {
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: solid 1px #120997;
+  border-radius: 5px;
+  appearance: none; /* Removes default dropdown arrow */
+  -webkit-appearance: none; /* Removes dropdown for Safari */
+  -moz-appearance: none; /* Removes dropdown for Firefox */
+}
+
 </style>

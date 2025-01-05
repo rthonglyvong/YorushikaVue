@@ -1,7 +1,7 @@
 [
     {
         "type": "Cover",
-        "bgm": "music/01.mp3",
+        "bgm": "01.mp3",
         "content": {
             "title": "Cover Page",
             "body": "Welcome to the Interactive Book"
@@ -9,7 +9,7 @@
     },
     {
         "type": "Text",
-        "bgm": "music/01.mp3",
+        "bgm": "01.mp3",
         "content": {
             "title": "Page 1",
             "body": "This is page 1."
@@ -17,7 +17,7 @@
     },
     {
         "type": "Image",
-        "bgm": "music/01.mp3",
+        "bgm": "01.mp3",
         "content": {
             "title": "Image Page",
             "body": "public/background.jpg"
@@ -25,7 +25,7 @@
     },
     {
         "type": "Text",
-        "bgm": "music/01.mp3",
+        "bgm": "01.mp3",
         "content": {
             "title": "Page 2",
             "body": "This is page 2."
@@ -33,7 +33,7 @@
     },
     {
         "type": "Video",
-        "bgm": "music/10.mp3",
+        "bgm": "10.mp3",
         "content": {
             "title": "Yorushika - Parade",
             "body": "https://www.youtube.com/embed/ry3Tupx4BL4?cc_load_policy=1&cc_lang_pref=en&hl=en"
@@ -41,7 +41,7 @@
     },
     {
         "type": "Text",
-        "bgm": "music/10.mp3",
+        "bgm": "10.mp3",
         "content": {
             "title": "Page 3",
             "body": "This is page 3."
@@ -49,7 +49,7 @@
     },
     {
         "type": "Text",
-        "bgm": "music/10.mp3",
+        "bgm": "10.mp3",
         "content": {
             "title": "Page 4",
             "body": "This is page 4."
@@ -57,7 +57,7 @@
     },
     {
         "type": "Cover",
-        "bgm": "music/10.mp3",
+        "bgm": "10.mp3",
         "content": {
             "title": "The End",
             "body": "Thank you for exploring the Interactive Book!"
