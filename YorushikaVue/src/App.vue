@@ -4,7 +4,7 @@
       <source :src="currentBgm" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <div id="pageflip-container" style="background-image: url('/background.jpg'); background-size: cover; background-position: center;">
+    <div id="pageflip-container" style="background-image: url('/YorushikaVue/background.jpg'); background-size: cover; background-position: center;">
       <!-- First Cover Page -->
       <div class="page page-cover" data-density="hard">
         <div class="page-content">
@@ -19,7 +19,7 @@
           <h2>{{ page.content.title }}</h2>
           <p v-if="page.type === 'Text'" v-html="convertNewlines(page.content.body)"></p>
           <iframe v-if="page.type === 'Video'" :src="'https://www.youtube.com/embed/' + getVideoId(page.content.body)" width="100%" height="60%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          <img v-if="page.type === 'Image'" :src="page.content.body" alt="Page image" style="max-width:100%; max-height:100%; object-fit:contain;">
+          <img v-if="page.type === 'Image'" :key="selectedLanguage" :src="'/YorushikaVue/'+page.content.body" alt="Page image" style="max-width:100%; max-height:100%; object-fit:contain;">
         </div>
       </div>
 
@@ -31,7 +31,8 @@
         </div>
       </div>
     </div>
-    <div class="controls">
+  </div>
+  <div class="controls">
       <button id="audio-toggle" @click="toggleBgm">{{ isMuted ? 'Unmute' : 'Mute' }}</button>
       <button @click="flipPrev">Previous</button>
       <button @click="flipNext">Next</button>
@@ -42,7 +43,6 @@
         <option value="cn">中文</option>
       </select>
     </div>
-  </div>
 </template>
 
 <script>
@@ -108,7 +108,7 @@ export default {
       this.pages.forEach((page, index) => {
         if (page.bgm && !this.bgmFiles[page.bgm]) { // Only preload if not already done
           console.log(`Preloading BGM: /music/${page.bgm}`);
-          const audio = new Audio(`/music/${page.bgm}`);
+          const audio = new Audio(`/YorushikaVue/music/${page.bgm}`);
           this.bgmFiles[page.bgm] = audio; // Store the audio objects by the BGM filename (e.g., "01.mp3")
         }
       });
@@ -281,6 +281,10 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  box-sizing: border-box; /* Apply box-sizing globally */
+  align-items: center;      /* Vertically center the #app */
+  display: flex;
+
 }
 #app {
   display: flex;
@@ -291,9 +295,22 @@ body {
   width: 100vw;
   overflow: hidden;
   background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  height: 100%;  /* Ensures #app takes up the full height of the screen */
+  width: 100%;
+  box-sizing: border-box; 
 }
 .controls {
-  margin-top: 20px;
+  position: fixed;       /* Fixes the controls to the bottom of the screen */
+  left: 0;
+  right: 0;
+  bottom: 0;             /* Sticks it to the bottom */
+  background-color: rgba(0, 0, 0, 0.5);  /* Optional: Add background to make it stand out */
+  color: white;          /* Text color */
+  padding: 10px;         /* Padding inside the controls */
+  text-align: center;    /* Center the text inside the controls */
+  z-index: 10;           /* Ensure it stays on top of other content */
 }
 button {
   margin: 5px;
@@ -311,8 +328,8 @@ button {
   color: #274C77;
   border: solid 1px hsl(35, 20%, 70%);
   overflow: hidden;
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.1em;
+  font-family: 'Patrick Hand', cursive;
+  font-size: clamp(12px, 5vw, 17px);
   line-height: 1.6;
   text-align: center;
 }
@@ -350,7 +367,7 @@ select {
 .page-content.cover-page h2,
 .page-content.cover-page p {
   text-align: center; /* Center-align text on cover pages */
-  font-size: 2rem;    /* Example: adjust font size for cover page */
+  font-size: clamp(15px, 5vw, 48px);
   margin: 20px 0;     /* Add margin if needed */
 }
 
@@ -358,13 +375,13 @@ select {
 /* Optional: Adding media queries for further control */
 @media (max-width: 768px) {
   .page {
-    font-size: .7em; /* Larger font size for tablets */
+    font-size: clamp(15px, 5vw, 48px);
   }
 }
 
 @media (max-width: 480px) {
   .page {
-    font-size: .5em; /* Larger font size for mobile */
+    font-size: clamp(10px, 2.7vw, 14px);
   }
 }
 </style>

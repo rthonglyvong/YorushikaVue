@@ -4,7 +4,7 @@
         "bgm": "01.mp3",
         "content": {
             "title": "Moonlight",
-            "body": "by Yorushika\n\n\n\n\n\nAll Music on this website is owned by Yorushika"
+            "body": "by Yorushika"
         }
     },
     {
@@ -12,7 +12,7 @@
         "bgm": "01.mp3",
         "content": {
             "title": "To Elma",
-            "body": "<span style=\"font-weight: 700;\">blank page</span>"
+            "body": ""
         }
     },
     {
@@ -224,11 +224,179 @@
         }
     },
     {
-        "type": "Cover",
+        "type": "Text",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "",
+            "body": "I think it was around the start of last summer.\nOne evening, I went in front of the station for the first time in a while with my guitar to sing songs. It was a street performance.\nIt was just after I had quit my long-held part time job, so it was a period when I was writing out of <span style=\"font-weight: 700;\">force of habit</span>. It was a place without much foot traffic. The sunset was casting an orange light on the shopping district on the other side of the street. Students, working men, young couples, and elderly people would occasionally lightly stop walking, before losing interest and leaving. It would repeat like that in an obvious loop without changing. It was right after I had finished tuning for the next song.\nLooking up right in front of me, suddenly a middle aged man was standing there staring at me. I lightly bowed my head, then readied my <span style=\"font-weight: 700;\">guitar</span>.\nA few minutes after I had begun playing my song, he was still listening without saying a word. As the performance was drawing to a close, his body language returned to normal as if he had lost interest, as he left his impression in a <span style=\"font-weight: 700;\">single remark</span>..\n\"Boring song ain't it.\" He said.\nWhat do you think I thought when I heard that?\n\n<span style=\"font-weight: 900;\">I didn't care.</span>\n\nI didn't care at all, Elma.\nI stopped playing there, and on my way home headed through the shopping district across the street. I still can't forget the <span style=\"font-weight: 700;\">sunset</span> confused for the night* I saw that day."
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "",
+            "body": "image/08.png"
+        }
+    },
+    {
+        "type": "Video",
+        "bgm": "05.mp3",
+        "content": {
+            "title": "7/11 (False Night)",
+            "body": "https://www.youtube.com/watch?v=vyo-hKgWFsg"
+        }
+    },
+    {
+        "type": "Text",
         "bgm": "10.mp3",
         "content": {
+            "title": "",
+            "body": "blank page"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "5/6",
+            "body": "North of Lund, on a road towards Stockholm, I met a thief. \nWell, I don't really have anything left to lose, but I was bothered that they stole some cash that I had and the extra ink that I had brought with me. As you know, I'm determined to use this old pen and this ink when I write things, so, well, I'm saving it so I don't lose it. \n\nI’ve been thinking about life’s <span style=\"font-weight: 700;\">expiration date</span>.\nI think that since life is similar to music to me, you can also say it's the same with the expiration date of a work of art. Matsuo Basho left a quote saying \"Let your haikus be written as if by a child.\"\nI think that can also be said about music. \nRather than focusing on works of music that we have been used to, music that focus on technical skills to create, the really good ones are the works that have been made poorly but have inspirational impulse within them.\nAnd so, that's what made my music really fun to me, but it stopped 2 or 3 years after my initial impulse. And if I am to be honest, it’s already passed its <span style=\"font-weight: 700;\">expiration date</span>.\nThere’s nothing but music for me. \nStill, I couldn't create as much music as I wanted to, I didn't have the heart to break out of the current problems, nor did I have any goals, and I just continued to <span style=\"font-weight: 700;\">imitate the</span> art in a sluggish, aimless, slow manner. It’s like pedaling a bike with no brakes. There's this quote from Agiwara Sakutaro's poetry book collection that has been scattered around throughout the years. \n\"The <span style=\"font-weight: 700;\">thoughts</span> that burn my emotions, alas, they are no longer to be found anywhere\"\n\n(Translated by anko;-;)"
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "image/09.png"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "blank page"
+        }
+    },
+    {
+        "type": "Video",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "7/12 (Parade)",
+            "body": "https://www.youtube.com/watch?v=ry3Tupx4BL4"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "blank page"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "8/8",
+            "body": "Visby really is a good town.\nIf you climb the steps of the Santa Maria cathedral, you get a nice hilltop view of the whole town. On clear days at dusk, you can see the sun sink behind the horizon line over the ocean. Even though I say all this, I think I've overstayed my welcome.\nI only have a little money and ink left.\nFrom here I'll return to Stockholm. It's the city that I walked in my childhood.\nIt must have been about a year ago.\nIt was when I quit my job. Have I written about quitting already? Well honestly, it wasn't quitting. It was escaping.\n[The writing gets faint from here due to the ink running out]\nOn those days as well, while I would hang my head getting yelled at by the boss for some trivial mistake, I was always thinking of something completely separate. Robert Johnson, Jimmy Hendrick, Brian Johns, Jim Morrison, all of them died at the peak of their musical careers at age <span style=\"font-weight: 700;\">27</span>."
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "That's the jinx called the 27 club. It's pretty famous.\nI wonder if at the end of my life, if the last thing remaining will be satisfaction. I won't say 27, but if the rest of my life was limited to <span style=\"font-weight: 700;\">just this</span> time, I wondered if it'd be all for the better, to throw everything away and confront only music.\nWould I be able to call such a thing impossible, rot and stagnate until my death, and return to meaningless ordinary life as it had been.\n\nWhile thinking about such things, I had already packed my bags and flown out the door. It was a beautiful waning moon <span style=\"font-weight: 700;\">night</span>. Riding my bike, I mindlessly arrived in front of the station. I thought it nice to go somewhere far away for some reason.\nI think about it now. <span style=\"font-weight: 700;\">At that time,</span> I had already decided to end it all this summer.\n\nThis single year. This single year is my entire life.\nLife is too long to do nothing, but too short to do something.\nThat phrase of yours was probably pulled from The Moon Over the Mountain.\nUnder that moonlight, as if it were the sun filtered through the trees.\n\nI finally remembered that time, Elma."
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "image/10.png"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "blank page"
+        }
+    },
+    {
+        "type": "Video",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "8/31 (Elma)",
+            "body": "https://www.youtube.com/watch?v=Y2sPl0G1yck"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "blank page"
+        }
+    },
+    {
+        "type": "Image",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "image/11.png"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "4/10",
+            "body": "This will be my second time trying to write this letter.\nI say letter, but you probably won't read this, so I think it's more of a journal.\nI've been doing some things lately, other than music.\nGathering my belongings.\nCleaning my apartment.\nI bought a ticket headed for that country, and packed my things.\nOnly the bare essential luggage, an ink bottle, a fountain pen, a camera, an acoustic guitar, and a plain wooden box to hold the songs I write.\nI think the money I saved up from my part time job should last me until the end of summer.\n\nNow I depart for my journey.\nMy life's final journey.\nIt's a bit late to mention it, but how my music is, if it will sell or not, whether life is painful or not, I really don't care anymore.\nElma. I wonder what I will think of during this journey, what I will feel."
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "10.mp3",
+        "content": {
+            "title": "",
+            "body": "blank page"
+        }
+    },
+    {
+        "type": "Video",
+        "bgm": "13.mp3",
+        "content": {
+            "title": "8/25 (That's Why I Quit Music)",
+            "body": "https://www.youtube.com/watch?v=KTZ-y85Erus"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "13.mp3",
+        "content": {
+            "title": "8/31",
+            "body": "I've run out of ink. Please forgive me if some of this is illegible.\n\nEven so Elma, me ending up like this,\nit's not that I despaired over music, or that I've abandoned life.\nA story that doesn't end is boring. A tale that keeps dragging on isn't elegant.\nLife has to be the same way.\nIf my own tale is to be written, it can't be shown by anything but music.\nWhat I've seen on this journey, what I've felt, I wrote my music with only that.\nThe songs I've put in this box are a single work that symbolizes me.\nYou could say that the music is itself my very life.\nElma, I could never give it to anyone but you.\n\nI don't know what will happen to the box that I put this letter in.\nI'm praying that some kind stranger will read the memo on it and return it to your address.\n\n"
+        }
+    },
+    {
+        "type": "Text",
+        "bgm": "13.mp3",
+        "content": {
+            "title": "",
+            "body": "I'm all out of paper.\nI've been remembering that time a lot lately.\nMyself, getting used to being a pianist... myself, wanting to become an <span style=\"font-weight: 700;\">author</span>...\nMyself, without being able to give up on my dream of music, starting to write songs.\nUntil now, my life has been a series of compromises.\nTruly, I lived compromising everything.\n\nNow I can say it. Now, even with who I am.\nI once gave up on music. Why I started writing again...\nwas because I read your songs, Elma.\nYou didn't show me often, but that time when I felt you through your song, I saw the moonlight.\n\nThe <span style=\"font-weight: 600;\">unerring</span>, faultless <span style=\"font-weight: 700;\">light</span> that can only illuminate the night*.\n\nUnimaginably soft, dazzling beyond my wildest dreams, <span style=\"color: #274C77;\">p</span><span style=\"color: #2a4c7a;\">a</span><span style=\"color: #3c5b88;\">l</span><span style=\"color: #4e6b96;\">e</span> <span style=\"color: #7187B1;\">m</span><span style=\"color: #8296BF;\">o</span><span style=\"color: #93A4CC;\">o</span><span style=\"color: #A4B2D9;\">n</span><span style=\"color: #B5BFE6;\">l</span><span style=\"color: #C6CCE3;\">i</span><span style=\"color: #D7DAF0;\">g</span><span style=\"color: #E8E7FD;\">h</span><span style=\"color: hsl(35, 55%, 98%);\">t</span>\n\nNote: the japanese phrase is \"yoru shika terasanai mubyuu no hikari\". yoru shika... yorushika. Yep."
+        }
+    },
+    {
+        "type": "Cover",
+        "bgm": "13.mp3",
+        "content": {
             "title": "The End",
-            "body": "Thank you for exploring the Interactive Book!"
+            "body": "Thank you for exploring the Interactive Book! If I finished Elma Diary it can be found by going to the original website or adding a 2 to the website address. Thank you /r/yorushika and community for providing translations"
         }
     }
 ]
