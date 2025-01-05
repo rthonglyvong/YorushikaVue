@@ -4,7 +4,6 @@
       <source :src="bgm" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <button id="audio-toggle" @click="toggleBgm">{{ isMuted ? 'Unmute' : 'Mute' }}</button>
     <div id="pageflip-container" style="background-image: url('/background.jpg'); background-size: cover; background-position: center;">
       <!-- First Cover Page -->
       <div class="page page-cover" data-density="hard">
@@ -29,8 +28,15 @@
       </div>
     </div>
     <div class="controls">
+      <button id="audio-toggle" @click="toggleBgm">{{ isMuted ? 'Unmute' : 'Mute' }}</button>
       <button @click="flipPrev">Previous</button>
       <button @click="flipNext">Next</button>
+      <select id="language-selector" @change="changeLanguage">
+        <option value="en">English</option>
+        <option value="kr">Korean</option>
+        <option value="jp">Japanese</option>
+        <option value="ch">Chinese</option>
+      </select>
     </div>
   </div>
 </template>
@@ -155,19 +161,6 @@ button {
   padding: 10px 20px;
   cursor: pointer;
 }
-#audio-toggle {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  padding: 10px;
-  background-color: #274C77;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
 .flip-book {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
   display: none;
