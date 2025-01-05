@@ -16,8 +16,8 @@
       <!-- Dynamic Pages -->
       <div v-for="(page, index) in pages.slice(1, pages.length - 1)" :key="index" class="page" :data-type="page.type">
         <div :class="'page-content page-'+index">
-          <h2>{{ page.content.title }}</h2>
-          <p v-if="page.type === 'Text'" v-html="convertNewlines(page.content.body)"></p>
+          <h2 :key="selectedLanguage">{{ page.content.title }}</h2>
+          <p v-if="page.type === 'Text'" :key="selectedLanguage" v-html="convertNewlines(page.content.body)"></p>
           <!-- Change iframe to dynamic player initialization -->
           <div v-if="page.type === 'Video'" ref="videoPlayer" :id="'video-' + index + 1">
             <div :id="`youtube-player-${index + 1}`"></div> <!-- THIS IS DIFFERENT -->
@@ -166,6 +166,7 @@ export default {
     },
     updatePageContent() {
       // You can load the corresponding pages data here based on the selected language
+      console.log("updatepagecontent: " + this.selectedLanguage)
       switch (this.selectedLanguage) {
         case 'en':
           this.pages = this.pagesEnData;
@@ -293,6 +294,26 @@ export default {
         this.player.destroy();
         this.player = null;
       }
+
+      let languageCode;
+        switch (this.selectedLanguage) {
+          case 'jp':
+            languageCode = 'ja'; // Japanese
+            break;
+          case 'kr':
+            languageCode = 'ko'; // Korean
+            break;
+          case 'en':
+            languageCode = 'en'; // English
+            break;
+          case 'cn':
+            languageCode = 'zh'; // Simplified Chinese (Mandarin)
+            break;
+          default:
+            languageCode = 'en'; // Default to English if no match
+            break;
+        }
+
       console.log("page type: " + page.type)
       console.log("page orientation: " + this.pageFlip.getOrientation())
       const isLandscape = this.pageFlip.getOrientation() === "landscape"
@@ -305,6 +326,12 @@ export default {
         // Initialize the YouTube player with specified width and height
         this.player = new YT.Player(`youtube-player-${currentPage}`, {
           videoId: videoId,
+          playerVars: {
+            'cc_load_policy': 1,  // Show captions by default
+            'cc_lang_pref': languageCode,  // Set the captions language
+            'autoplay': 1,         // Autoplay video when ready
+            'controls': 1,         // Show player controls
+          },
           width: playerWidth,         // Set width for the player
           height: playerHeight,       // Set height for the player
           events: {
@@ -322,6 +349,12 @@ export default {
           // Initialize the YouTube player with specified width and height
           this.player = new YT.Player(`youtube-player-${secondPageNumber}`, {
             videoId: videoId,
+            playerVars: {
+              'cc_load_policy': 1,  // Show captions by default
+              'cc_lang_pref': languageCode,  // Set the captions language
+              'autoplay': 1,         // Autoplay video when ready
+              'controls': 1,         // Show player controls
+            },
             width: playerWidth,         // Set width for the player
             height: playerHeight,       // Set height for the player
             events: {
@@ -333,7 +366,8 @@ export default {
       }
     },
     onPlayerReady(event) {
-      event.target.playVideo();
+        event.target.playVideo();
+
     },
     onPlayerStateChange(event) {
       console.log('Player state changed:', event.data);
@@ -357,6 +391,7 @@ export default {
           languageCode = 'en'; // Default to English if no match
           break;
       }
+      this.updatePageContent();
       this.setCaptionsLanguage(languageCode);
     },
     setCaptionsLanguage(languageCode) {
