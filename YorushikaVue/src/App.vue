@@ -473,6 +473,11 @@ button {
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: solid 1px #120997;
+  border-radius: 5px;
 }
 .flip-book {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
