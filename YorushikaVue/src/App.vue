@@ -15,10 +15,13 @@
 
       <!-- Dynamic Pages -->
       <div v-for="(page, index) in pages.slice(1, pages.length - 1)" :key="index" class="page" :data-type="page.type">
-        <div class="page-content">
+        <div :class="'page-content page-'+index">
           <h2>{{ page.content.title }}</h2>
           <p v-if="page.type === 'Text'" v-html="convertNewlines(page.content.body)"></p>
-          <iframe v-if="page.type === 'Video'" :src="'https://www.youtube.com/embed/' + getVideoId(page.content.body)" width="100%" height="60%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <!-- Change iframe to dynamic player initialization -->
+          <div v-if="page.type === 'Video'" ref="videoPlayer" :id="'video-' + index + 1">
+            <div :id="`youtube-player-${index + 1}`"></div> <!-- THIS IS DIFFERENT -->
+          </div>          
           <img v-if="page.type === 'Image'" :key="selectedLanguage" :src="'/YorushikaVue/'+page.content.body" alt="Page image" style="max-width:100%; max-height:100%; object-fit:contain;">
         </div>
       </div>
@@ -53,6 +56,26 @@ import pagesKrData from '@/content/pages.kr.json';
 import pagesJpData from '@/content/pages.jp.json';
 import pagesCnData from '@/content/pages.cn.json';
 
+//load youtube api
+function loadYouTubeAPI() {
+  return new Promise((resolve, reject) => {
+    if (typeof YT !== 'undefined') {
+      resolve();
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://www.youtube.com/iframe_api';
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = (err) => reject(err);
+
+    document.head.appendChild(script);
+
+    window.onYouTubeIframeAPIReady = () => resolve(); // API is ready
+  });
+}
+
 export default {
   name: 'App',
   data() {
@@ -67,6 +90,7 @@ export default {
       bgmFiles: {},  // Store preloaded audio objects by filename
       currentBgm: '', // Track the current BGM file
       isMuted: false,
+      player: null,
     };
   },
   mounted() {
@@ -74,6 +98,11 @@ export default {
       this.initPageFlip();
       this.preloadBgm();  // Preload all BGM files
       this.updateAudioState(); // Set initial bgm after pageFlip is initialized
+      loadYouTubeAPI()
+        .then(() => {
+          this.updateAudioState(); // Initial BGM state
+        })
+        .catch((err) => console.error('Error loading YouTube API:', err));
     });
   },
   methods: {
@@ -90,7 +119,7 @@ export default {
           languageCode = 'en'; // English
           break;
         case 'cn':
-          languageCode = 'zh-CN'; // Simplified Chinese (Mandarin)
+          languageCode = 'zh'; // Simplified Chinese (Mandarin)
           break;
         default:
           languageCode = 'en'; // Default to English if no match
@@ -98,7 +127,8 @@ export default {
       }
       console.log("video selected language: " + languageCode)
       const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|(?:.*[?&]v=))|(?:youtu\.be\/))([\w\-]+)/);
-      return videoIdMatch ? videoIdMatch[1]+`?cc_load_policy=1&cc_lang_pref=${this.languageCode}` : null;
+      console.log("video id: " + videoIdMatch[1])
+      return videoIdMatch ? videoIdMatch[1] : null;
     },
     convertNewlines(text) {
       return text.replace(/\n/g, '<br>');
@@ -173,6 +203,7 @@ export default {
       // Update audio state after page flip
       this.pageFlip.on('flip', () => {
         this.updateAudioState();
+        this.handleVideoPlayer();
       });
     },
     
@@ -180,7 +211,7 @@ export default {
       const audioElement = document.getElementById('background-music');
       const currentPage = this.pageFlip.getCurrentPageIndex();
       const nextPage = currentPage + 1;
-      const isPortrait = window.innerHeight > window.innerWidth; // Portrait mode
+      const isPortrait = this.pageFlip.getOrientation() === "portrait"; // Portrait mode
       const isLandscape = window.innerWidth > window.innerHeight; // Landscape mode
 
       console.log(`Current Orientation: ${isPortrait ? 'Portrait' : 'Landscape'}`);
@@ -248,6 +279,89 @@ export default {
         }
       } else {
         console.error(`Selected BGM does not exist in bgmFiles: ${highestPriorityBgm}`);
+      }
+    },
+    handleVideoPlayer() {  // THIS IS DIFFERENT: Method to handle video player initialization
+      const currentPage = this.pageFlip.getCurrentPageIndex();
+      const secondPageNumber = currentPage + 1
+      const page = this.pages[currentPage];
+      const pageSecond = this.pages[secondPageNumber]
+      console.log(currentPage)
+      
+      // Destroy the previous player if it exists
+      if (this.player) {
+        this.player.destroy();
+        this.player = null;
+      }
+      console.log("page type: " + page.type)
+      console.log("page orientation: " + this.pageFlip.getOrientation())
+      const isLandscape = this.pageFlip.getOrientation() === "landscape"
+      if (page && page.type === 'Video') {
+        console.log("ThisPage:" + currentPage)
+        const videoId = this.getVideoId(page.content.body);
+              // Set dynamic width and height based on container size or your design logic
+        const playerWidth = '100%';  // Or any specific width like '640px'
+        const playerHeight = '100%';  // Or a fixed height like '360px'
+        // Initialize the YouTube player with specified width and height
+        this.player = new YT.Player(`youtube-player-${currentPage}`, {
+          videoId: videoId,
+          width: playerWidth,         // Set width for the player
+          height: playerHeight,       // Set height for the player
+          events: {
+            onReady: this.onPlayerReady,
+            onStateChange: this.onPlayerStateChange,
+          },
+        });
+      } else if(isLandscape) {
+        if (pageSecond && pageSecond.type === 'Video') {
+          console.log("ThisPage:" + currentPage + 1)
+          const videoId = this.getVideoId(pageSecond.content.body);
+                // Set dynamic width and height based on container size or your design logic
+          const playerWidth = '100%';  // Or any specific width like '640px'
+          const playerHeight = '100%';  // Or a fixed height like '360px'
+          // Initialize the YouTube player with specified width and height
+          this.player = new YT.Player(`youtube-player-${secondPageNumber}`, {
+            videoId: videoId,
+            width: playerWidth,         // Set width for the player
+            height: playerHeight,       // Set height for the player
+            events: {
+              onReady: this.onPlayerReady,
+              onStateChange: this.onPlayerStateChange,
+            },
+          });
+        }
+      }
+    },
+    onPlayerReady(event) {
+      event.target.playVideo();
+    },
+    onPlayerStateChange(event) {
+      console.log('Player state changed:', event.data);
+    },
+    changeLanguage() {
+      let languageCode;
+      switch (this.selectedLanguage) {
+        case 'jp':
+          languageCode = 'ja'; // Japanese
+          break;
+        case 'kr':
+          languageCode = 'ko'; // Korean
+          break;
+        case 'en':
+          languageCode = 'en'; // English
+          break;
+        case 'cn':
+          languageCode = 'zh'; // Simplified Chinese (Mandarin)
+          break;
+        default:
+          languageCode = 'en'; // Default to English if no match
+          break;
+      }
+      this.setCaptionsLanguage(languageCode);
+    },
+    setCaptionsLanguage(languageCode) {
+      if (this.player) {
+        this.player.setOption('captions', 'track', { languageCode });
       }
     },
     // Method to flip to the next page
@@ -341,6 +455,10 @@ button {
   height: 100%;
   width: 100%;
   text-align: center;
+}
+[id^="video-"] {
+  height: 60%;
+  width: 100%;
 }
 
 select {
