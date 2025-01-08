@@ -8,19 +8,21 @@
       <!-- First Cover Page -->
       <div class="page page-cover" data-density="hard">
         <div class="page-content">
-          <h1>{{ pages[0].content.title }}</h1>
-          <p>{{ pages[0].content.body }}</p>
+          <h1>{{ processedPages[0].content.title }}</h1>
+          <p>{{ processedPages[0].content.body }}</p>
         </div>
       </div>
 
       <!-- Dynamic Pages -->
-      <div v-for="(page, index) in pages.slice(1, pages.length - 1)" :key="index" class="page" :data-type="page.type">
+      <div v-for="(page, index) in processedPages.slice(1, processedPages.length - 1)" 
+      :key="index" 
+      class="page" 
+      :data-type="page.type">
         <div :class="'page-content page-'+index">
           <h1 :key="selectedLanguage">{{ index === 0 && customTitle ? "To " + customTitle : page.content.title }}</h1>
           <p v-if="page.type === 'Text'" :key="selectedLanguage" v-html="convertNewlines(page.content.body)"></p>
-          <!-- Change iframe to dynamic player initialization -->
-          <div v-if="page.type === 'Video'" ref="videoPlayer" :id="'video-' + index + 1">
-            <div :id="`youtube-player-${index + 1}`"></div> <!-- THIS IS DIFFERENT -->
+          <div v-if="page.type === 'Video'" ref="videoPlayer" :id="'video-' + index">
+            <div :id="`youtube-player-${index + 1}`"></div>
           </div>          
           <img v-if="page.type === 'Image'" :key="selectedLanguage" :src="'/YorushikaVue/'+page.content.body" alt="Page image" style="max-width:100%; max-height:100%; object-fit:contain;">
         </div>
@@ -29,12 +31,13 @@
       <!-- Last Cover Page -->
       <div class="page page-cover" data-density="hard">
         <div class="page-content">
-          <h1>{{ pages[pages.length - 1].content.title }}</h1>
-          <p>{{ pages[pages.length - 1].content.body }}</p>
+          <h1>{{ processedPages[processedPages.length - 1].content.title }}</h1>
+          <p>{{ processedPages[processedPages.length - 1].content.body }}</p>
         </div>
       </div>
     </div>
   </div>
+
   <div class="controls">
       <button id="audio-toggle" @click="toggleBgm">{{ isMuted ? 'Unmute' : 'Mute' }}</button>
       <button @click="flipPrev">Previous</button>
@@ -107,7 +110,105 @@ export default {
         .catch((err) => console.error('Error loading YouTube API:', err));
     });
   },
+  computed: {
+    processedPages() {
+      // Start with first cover page
+      const result = [this.pages[0]];
+      
+      // Process middle pages
+      this.pages.slice(1, this.pages.length - 1).forEach(page => {
+        if (page.type === 'Text' && page.content.body) {
+          const splitPages = this.splitTextContent(page);
+          result.push(...splitPages);
+        } else {
+          result.push(page);
+        }
+      });
+      
+      // Add last cover page
+      result.push(this.pages[this.pages.length - 1]);
+      
+      return result;
+    }
+  },
   methods: {
+    splitTextContent(page) {
+      // Create a temporary div to measure content
+      const tempDiv = document.createElement('div');
+      tempDiv.style.cssText = `
+        position: absolute;
+        visibility: hidden;
+        font-family: 'Waiting for the Sunrise', serif;
+        font-size: clamp(12px, 5vw, 29px);
+        line-height: 1.6;
+        padding: clamp(1rem, 3vw, 2.5rem);
+        width: ${this.pageFlip ? this.pageFlip.getSettings().width - 40 : 510}px;
+        height: ${this.pageFlip ? this.pageFlip.getSettings().height - 40 : 693}px;
+      `;
+      document.body.appendChild(tempDiv);
+
+      // Get content as array
+      const paragraphs = Array.isArray(page.content.body) ? page.content.body : [page.content.body];
+      
+      const splitPages = [];
+      let currentContent = [];
+      let isFirstPage = true;
+
+      paragraphs.forEach(paragraph => {
+        // Test adding this paragraph
+        tempDiv.innerHTML = '';
+        
+        // Add title if it's first page
+        if (isFirstPage && page.content.title) {
+          const titleDiv = document.createElement('h1');
+          titleDiv.style.cssText = `
+            font-family: 'Fredericka the Great', cursive;
+            font-size: clamp(12px, 5vw, 29px);
+            margin: 20px 0;
+          `;
+          titleDiv.textContent = page.content.title;
+          tempDiv.appendChild(titleDiv);
+        }
+
+        // Add current content plus new paragraph
+        const content = [...currentContent, paragraph].join('\n');
+        const contentDiv = document.createElement('p');
+        contentDiv.innerHTML = this.convertNewlines(content);
+        tempDiv.appendChild(contentDiv);
+
+        // Check if content fits
+        if (tempDiv.scrollHeight > tempDiv.clientHeight) {
+          // Content doesn't fit, create new page with current content
+          splitPages.push({
+            ...page,
+            content: {
+              title: isFirstPage ? page.content.title : '',
+              body: currentContent.join('\n')
+            }
+          });
+          currentContent = [paragraph];
+          isFirstPage = false;
+        } else {
+          currentContent.push(paragraph);
+        }
+      });
+
+      // Add remaining content as last page
+      if (currentContent.length > 0) {
+        splitPages.push({
+          ...page,
+          content: {
+            title: isFirstPage ? page.content.title : '',
+            body: currentContent.join('\n')
+          }
+        });
+      }
+
+      // Clean up
+      document.body.removeChild(tempDiv);
+      return splitPages;
+    },
+
     getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search); // Read query string
       return urlParams.get(param); // Return the value of the specified parameter
@@ -137,7 +238,13 @@ export default {
       return videoIdMatch ? videoIdMatch[1] : null;
     },
     convertNewlines(text) {
-      return text.replace(/\n/g, '<br>');
+      // Handle array or string content
+      if (Array.isArray(text)) {
+        text = text.join('\n'); // Join array with newlines
+      } else if (typeof text !== 'string') {
+        text = ''; // Default to empty string for invalid values
+      }
+      return text.replace(/\n/g, '<br>'); // Convert newlines to <br> tags
     },
     // Preload all BGM files
     preloadBgm() {
@@ -187,6 +294,7 @@ export default {
           this.pages = this.pagesCnData;
           break;
       }
+
     },
     initPageFlip() {
       const container = document.getElementById('pageflip-container');
@@ -231,7 +339,7 @@ export default {
       }
       // Find the BGM of the visible pages
       visiblePages.forEach((pageIndex) => {
-        const page = this.pages[pageIndex];
+        const page = this.processedPages[pageIndex];
         if (page && page.type === 'Video') {
           shouldMute = true; // Mute if a video is displayed
         }
@@ -292,9 +400,9 @@ export default {
     },
     handleVideoPlayer() {  // THIS IS DIFFERENT: Method to handle video player initialization
       const currentPage = this.pageFlip.getCurrentPageIndex();
-      const secondPageNumber = currentPage + 1
-      const page = this.pages[currentPage];
-      const pageSecond = this.pages[secondPageNumber]
+      const secondPageNumber = Number(currentPage) + Number(1)
+      const page = this.processedPages[currentPage];
+      const pageSecond = this.processedPages[secondPageNumber]
       console.log(currentPage)
       
       // Destroy the previous player if it exists
@@ -349,7 +457,7 @@ export default {
         });
       } else if(isLandscape) {
         if (pageSecond && pageSecond.type === 'Video') {
-          console.log("ThisPage:" + currentPage + 1)
+          console.log("ThisPage:" + secondPageNumber)
           const videoId = this.getVideoId(pageSecond.content.body);
                 // Set dynamic width and height based on container size or your design logic
           const playerWidth = '100%';  // Or any specific width like '640px'
@@ -497,7 +605,7 @@ button {
   border: solid 1px hsl(35, 20%, 70%);
   overflow: hidden;
   font-family: 'Waiting for the Sunrise', serif;
-  font-size: clamp(12px, 5vw, 17px);
+  font-size: clamp(12px, 5vw, 29px);
   line-height: 1.6;
   text-align: center;
 }
@@ -509,6 +617,7 @@ button {
   height: 100%;
   width: 100%;
   text-align: center;
+  padding: clamp(1rem, 3vw, 2.5rem); /* Add responsive margin */
 }
 [id^="video-"] {
   height: 60%;
@@ -546,19 +655,10 @@ select {
   margin: 20px 0;     /* Add margin if needed */
 }
 
-
-/* Optional: Adding media queries for further control */
-@media (max-width: 768px) {
-  .page {
-    font-family: 'Waiting for the Sunrise', serif;
-    font-size: clamp(15px, 5vw, 48px);
-  }
-}
-
 @media (max-width: 480px) {
   .page {
     font-family: 'Waiting for the Sunrise', serif;
-    font-size: clamp(10px, 2.7vw, 14px);
+    font-size: clamp(10px, 5vw, 14px);
   }
 }
 </style>
